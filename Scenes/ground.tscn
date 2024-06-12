@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3iypi5dfu2th"]
+
+[ext_resource type="Texture2D" uid="uid://bijwx1wctd5fj" path="res://Assets/Sprites/base.png" id="1_jr5vy"]
+[ext_resource type="PackedScene" uid="uid://cw0jgfil2hjtv" path="res://Scenes/dead_zone.tscn" id="2_4gelp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3v6l"]
+size = Vector2(336, 111)
+
+[node name="Ground" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_jr5vy")
+
+[node name="DeadZone" parent="." instance=ExtResource("2_4gelp")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeadZone"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_b3v6l")
