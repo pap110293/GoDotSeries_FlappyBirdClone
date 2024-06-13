@@ -7,6 +7,19 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vo84t"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ycur4")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_64cr6")
@@ -18,13 +31,8 @@ animations = [{
 "texture": ExtResource("4_ycur4")
 }],
 "loop": true,
-"name": &"default",
+"name": &"fly",
 "speed": 10.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"die",
-"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g0udl"]
@@ -37,8 +45,8 @@ script = ExtResource("1_die2x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vo84t")
-animation = &"die"
-autoplay = "default"
+animation = &"down"
+autoplay = "fly"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_g0udl")

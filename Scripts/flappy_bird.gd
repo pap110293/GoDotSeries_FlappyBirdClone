@@ -22,12 +22,20 @@ func _physics_process(delta:float)->void:
 		velocity = Vector2(0, 0)
 		
 	move_and_slide()
+	
 
 func handle_gravity(delta:float)->void:
 	velocity.y += gravity * delta
 
 func _process(delta:float)->void:
-	pass
+	handle_animation()
+	
+
+func handle_animation()->void:
+	if velocity.y < 0:
+		animated_sprite.play("fly")
+	else:
+		animated_sprite.play("down")
 	
 func handle_input()->void:
 	if Input.is_action_just_pressed("fly"):
