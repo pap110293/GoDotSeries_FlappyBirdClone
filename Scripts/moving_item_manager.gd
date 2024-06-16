@@ -1,4 +1,5 @@
 extends Node2D
+
 class_name MovingItemManager
 
 var items:Array[MovingItem] = []

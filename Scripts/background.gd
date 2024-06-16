@@ -1,4 +1,5 @@
 extends MovingItem
+
 class_name Background
 
 @onready var sprite = $Sprite2D
