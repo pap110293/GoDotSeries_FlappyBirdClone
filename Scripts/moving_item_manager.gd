@@ -5,6 +5,7 @@ class_name MovingItemManager
 var items:Array[MovingItem] = []
 var item_distance:float
 var moving_speed:float
+var should_arrange_item:bool = true
 
 func _ready():
 	init()
@@ -22,10 +23,11 @@ func init():
 	pass
 			
 func arange_item_positions():
-	var itemPositionX = global_position.x
-	for item in items:
-		item.global_position.x = itemPositionX
-		itemPositionX += item_distance
+	if should_arrange_item:
+		var itemPositionX = global_position.x
+		for item in items:
+			item.global_position.x = itemPositionX
+			itemPositionX += item_distance
 
 func find_last_item():
 	var last_item

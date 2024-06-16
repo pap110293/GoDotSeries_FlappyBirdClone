@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6ve2hxhkmlix"]
+[gd_scene load_steps=8 format=3 uid="uid://c6ve2hxhkmlix"]
 
 [ext_resource type="PackedScene" uid="uid://3dolmuknvf1s" path="res://Scenes/flappy_bird.tscn" id="1_iloyg"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_m1otu"]
 [ext_resource type="PackedScene" uid="uid://bqflplh3shh68" path="res://Scenes/ground_manager.tscn" id="2_e4bov"]
 [ext_resource type="PackedScene" uid="uid://b30d8nug4a56i" path="res://Scenes/background_manager.tscn" id="3_rjvyg"]
+[ext_resource type="Script" path="res://Assets/Sprites/PipeManager.gd" id="4_bsf7e"]
+[ext_resource type="PackedScene" uid="uid://cfvw1at1bqy55" path="res://Scenes/pipes.tscn" id="5_6r7yk"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_28jfq"]
 distance = 30.0
@@ -23,6 +25,12 @@ speed = 50.0
 [node name="GroundManager" parent="." instance=ExtResource("2_e4bov")]
 position = Vector2(-473, 99)
 
+[node name="PipeManager" type="Node2D" parent="."]
+script = ExtResource("4_bsf7e")
+
+[node name="Pipes" parent="PipeManager" instance=ExtResource("5_6r7yk")]
+position = Vector2(550, -75)
+
 [node name="FlappyBird" parent="." instance=ExtResource("1_iloyg")]
 z_index = 2
 position = Vector2(-82, -76)
@@ -41,6 +49,7 @@ shape = SubResource("WorldBoundaryShape2D_28jfq")
 
 [connection signal="game_over" from="GameManager" to="BackgroundManager" method="_on_game_manager_game_over"]
 [connection signal="game_over" from="GameManager" to="GroundManager" method="_on_game_manager_game_over"]
+[connection signal="game_over" from="GameManager" to="PipeManager" method="_on_game_manager_game_over"]
 [connection signal="timeout" from="GameManager/GameOverTimer" to="GameManager" method="_on_game_over_timer_timeout"]
 [connection signal="died" from="FlappyBird" to="GameManager" method="_on_flappy_bird_died"]
 [connection signal="body_entered" from="LimitLine" to="BackgroundManager" method="_on_limit_line_body_entered"]
