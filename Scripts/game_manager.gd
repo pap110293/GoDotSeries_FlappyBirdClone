@@ -1,6 +1,10 @@
 extends Node
 
 @onready var game_over_timer = $GameOverTimer
+@onready var background_manager = $"../BackgroundManager"
+@onready var ground_manager = $"../GroundManager"
+@onready var pipe_manager = $"../PipeManager"
+
 signal game_over
 
 func _on_flappy_bird_died():

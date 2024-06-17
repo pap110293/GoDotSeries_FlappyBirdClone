@@ -2,7 +2,7 @@ extends Node2D
 
 class_name	MovingItem
 
-var move_speed:float = 100
+var move_speed:float = 0
 var is_moving = true;
 
 func _physics_process(delta):

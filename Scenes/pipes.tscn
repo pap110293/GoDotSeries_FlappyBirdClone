@@ -6,9 +6,9 @@
 [node name="Pipes" type="Node2D"]
 script = ExtResource("1_7lc0e")
 
-[node name="Pipe" parent="." instance=ExtResource("1_etn0a")]
+[node name="PipeTop" parent="." instance=ExtResource("1_etn0a")]
 position = Vector2(0, 160)
 
-[node name="Pipe2" parent="." instance=ExtResource("1_etn0a")]
+[node name="PipeBot" parent="." instance=ExtResource("1_etn0a")]
 position = Vector2(0, -160)
 rotation = -3.14159

@@ -47,9 +47,6 @@ position = Vector2(-717, -167)
 rotation = 1.57079
 shape = SubResource("WorldBoundaryShape2D_28jfq")
 
-[connection signal="game_over" from="GameManager" to="BackgroundManager" method="_on_game_manager_game_over"]
-[connection signal="game_over" from="GameManager" to="GroundManager" method="_on_game_manager_game_over"]
-[connection signal="game_over" from="GameManager" to="PipeManager" method="_on_game_manager_game_over"]
 [connection signal="timeout" from="GameManager/GameOverTimer" to="GameManager" method="_on_game_over_timer_timeout"]
 [connection signal="died" from="FlappyBird" to="GameManager" method="_on_flappy_bird_died"]
 [connection signal="body_entered" from="LimitLine" to="BackgroundManager" method="_on_limit_line_body_entered"]

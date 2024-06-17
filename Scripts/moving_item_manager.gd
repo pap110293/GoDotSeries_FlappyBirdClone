@@ -8,8 +8,6 @@ var moving_speed:float
 var should_arrange_item:bool = true
 
 func _ready():
-	init()
-	
 	for item in get_children():
 		if item is MovingItem:
 			item.set_speed(moving_speed)
@@ -19,9 +17,6 @@ func _ready():
 	
 	arange_item_positions()
 	
-func init():
-	pass
-			
 func arange_item_positions():
 	if should_arrange_item:
 		var itemPositionX = global_position.x
