@@ -11,9 +11,11 @@ func _ready():
 	for item in get_children():
 		if item is MovingItem:
 			item.set_speed(moving_speed)
-			items.push_back(item)
+			items.append(item)
 	
-	item_distance = items[0].get_sprite_width() - 1
+	
+	if !items.is_empty():
+		item_distance = items[0].get_sprite_width() - 1
 	
 	arange_item_positions()
 	

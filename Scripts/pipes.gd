@@ -1,5 +1,7 @@
 extends MovingItem
 
+class_name Pipes
+
 @onready var pipe_top = $PipeTop
 @onready var pipe_bot = $PipeBot
 
