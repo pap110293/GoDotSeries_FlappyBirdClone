@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6ve2hxhkmlix"]
+[gd_scene load_steps=9 format=3 uid="uid://c6ve2hxhkmlix"]
 
 [ext_resource type="PackedScene" uid="uid://3dolmuknvf1s" path="res://Scenes/flappy_bird.tscn" id="1_iloyg"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_m1otu"]
@@ -9,6 +9,9 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_28jfq"]
 distance = 30.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_81miu"]
+size = Vector2(797, 15)
 
 [node name="Game" type="Node2D"]
 
@@ -21,6 +24,7 @@ unique_name_in_owner = true
 script = ExtResource("1_m1otu")
 
 [node name="GameOverTimer" type="Timer" parent="GameManager"]
+wait_time = 2.0
 
 [node name="BackgroundManager" parent="." instance=ExtResource("3_rjvyg")]
 position = Vector2(-501, -182)
@@ -33,7 +37,7 @@ spawPos = NodePath("../SpawPos")
 
 [node name="RandomTimer" parent="PipeManager" instance=ExtResource("5_10xvg")]
 min = 1.0
-max = 3.0
+max = 2.0
 
 [node name="GroundManager" parent="." instance=ExtResource("2_e4bov")]
 position = Vector2(-473, 99)
@@ -52,6 +56,13 @@ position = Vector2(-717, -167)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LimitLine"]
 rotation = 1.57079
 shape = SubResource("WorldBoundaryShape2D_28jfq")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, -331)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(88, 0)
+shape = SubResource("RectangleShape2D_81miu")
 
 [connection signal="timeout" from="GameManager/GameOverTimer" to="GameManager" method="_on_game_over_timer_timeout"]
 [connection signal="timeout" from="PipeManager/RandomTimer" to="PipeManager" method="_on_random_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://3dolmuknvf1s"]
+[gd_scene load_steps=6 format=3 uid="uid://3dolmuknvf1s"]
 
 [ext_resource type="Script" path="res://Scripts/flappy_bird.gd" id="1_die2x"]
 [ext_resource type="Texture2D" uid="uid://b64fcti5cp23t" path="res://Assets/Sprites/yellowbird-downflap.png" id="2_64cr6"]
@@ -35,10 +35,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g0udl"]
-radius = 12.0
-height = 24.0
-
 [node name="FlappyBird" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_die2x")
@@ -48,5 +44,5 @@ sprite_frames = SubResource("SpriteFrames_vo84t")
 animation = &"down"
 autoplay = "fly"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_g0udl")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(13, 0, 15, 0, 15, 2, 17, 2, 17, 4, 15, 4, 15, 8, 13, 8, 13, 10, 3, 10, 3, 12, -7, 12, -7, 10, -11, 10, -11, 8, -13, 8, -13, 4, -15, 4, -15, 2, -17, 2, -17, -4, -15, -4, -15, -6, -11, -6, -11, -8, -9, -8, -9, -10, -5, -10, -5, -12, 7, -12, 7, -10, 9, -10, 9, -8, 11, -8, 11, -6, 13, -6)

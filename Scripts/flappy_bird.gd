@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var rotation_speed = 5  # Speed of rotation adjustment
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var collision_polygon = $CollisionPolygon2D
 
 signal died
 
@@ -14,12 +15,14 @@ var is_die:bool = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta:float)->void:
+	
 	if !is_die:
 		handle_gravity(delta)
 		handle_rotation(delta)
 		handle_input()
 	else:
-		velocity = Vector2(0, 0)
+		collision_polygon.disabled = true
+		velocity = Vector2(0,0)
 		
 	move_and_slide()
 	
