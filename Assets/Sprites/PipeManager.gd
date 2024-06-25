@@ -11,13 +11,10 @@ extends MovingItemManager
 
 @onready var random_timer = $RandomTimer
 
-#const PIPES = preload("res://Scenes/pipes.tscn")
-
 func _ready():
 	random_timer.start()
 	moving_speed = speed
 	should_arrange_item = false
-	%GameManager.game_over.connect(stop_all)
 	%GameManager.game_over.connect(stop_spawning)
 	random_timer.start_random()
 	random_timer.minValue = min_spaw_time

@@ -13,10 +13,10 @@ func _ready():
 			item.set_speed(moving_speed)
 			items.append(item)
 	
-	
 	if !items.is_empty():
 		item_distance = items[0].get_sprite_width() - 1
 	
+	%GameManager.game_over.connect(stop_all)
 	arange_item_positions()
 	
 func arange_item_positions():
