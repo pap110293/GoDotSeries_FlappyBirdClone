@@ -57,8 +57,7 @@ func handle_rotation(delta):
 	elif velocity.y < 0:
 		target_angle = -max_rotation
 
-	# TODO: need to calculate the angle while up and down
-	var new_rotation = lerpf(animated_sprite.rotation_degrees, target_angle, rotation_speed * delta)
+	var new_rotation = lerpf(rotation_degrees, target_angle, rotation_speed * delta)
 	
 	# Apply the new rotation to the Sprite node
-	animated_sprite.rotation_degrees = new_rotation
+	rotation_degrees = new_rotation

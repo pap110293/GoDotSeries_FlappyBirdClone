@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://yq5hkrlvu00y"]
+
+[ext_resource type="Script" path="res://Assets/Sprites/PipeManager.gd" id="1_v38li"]
+[ext_resource type="PackedScene" uid="uid://cgb3ewo3yw6dj" path="res://Scenes/random_timer.tscn" id="2_heakj"]
+
+[node name="PipeManager" type="Node2D" node_paths=PackedStringArray("spawPos")]
+position = Vector2(0, 1)
+script = ExtResource("1_v38li")
+spawPos = NodePath("")
+speed = null
+pipeDistance = null
+maxPipeRange = null
+minPipeRange = null
+minSpawTime = null
+maxSpawTime = null
+
+[node name="RandomTimer" parent="." instance=ExtResource("2_heakj")]
+
+[connection signal="timeout" from="RandomTimer" to="." method="_on_random_timer_timeout"]
