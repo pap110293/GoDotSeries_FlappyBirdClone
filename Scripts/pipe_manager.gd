@@ -14,6 +14,7 @@ extends MovingItemManager
 var rng = RandomNumberGenerator.new()
 
 func _ready():
+	#get_viewport().size_changed.connect(_on_viewport_size_changed)
 	rng.randomize()  # Seed the generator for more randomness
 	moving_speed = speed
 	should_arrange_item = false
@@ -23,6 +24,12 @@ func _ready():
 func _on_random_timer_timeout():
 	spawThePipe()
 	random_timer.start_random()
+
+func _on_viewport_size_changed()->void:
+	update_spaw_position()
+
+func update_spaw_position()->void:
+	spaw_pos.global_position.x = get_viewport().get_visible_rect().size.x + 100
 
 func spawThePipe():
 	var new_instance = pipe_scene.instantiate()
