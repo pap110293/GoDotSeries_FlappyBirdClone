@@ -10,22 +10,30 @@ extends CharacterBody2D
 signal died
 
 var is_die:bool = false
+var is_game_start:bool = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-func _physics_process(delta:float)->void:
+func _ready():
+	%GameManager.game_start.connect(_on_game_start)
+
+func _physics_process(delta:float):
+	handle_movement(delta)
 	
-	if !is_die:
+	if is_die:
+		collision_polygon.disabled = true
+		
+	
+func handle_movement(delta:float)->void:
+	if !is_die and is_game_start:
 		handle_gravity(delta)
 		handle_rotation(delta)
 		handle_input()
 	else:
-		collision_polygon.disabled = true
 		velocity = Vector2(0,0)
-		
-	move_and_slide()
 	
+	move_and_slide()
 
 func handle_gravity(delta:float)->void:
 	velocity.y += gravity * delta
@@ -42,7 +50,10 @@ func handle_animation()->void:
 	
 func handle_input()->void:
 	if Input.is_action_just_pressed("fly"):
-		velocity.y = -forceUp
+		fly_up()
+
+func fly_up()->void:
+	velocity.y = -forceUp
 
 func die()->void:
 	animated_sprite.stop()
@@ -61,3 +72,7 @@ func handle_rotation(delta):
 	
 	# Apply the new rotation to the Sprite node
 	rotation_degrees = new_rotation
+
+func _on_game_start()->void:
+	is_game_start = true
+	fly_up()

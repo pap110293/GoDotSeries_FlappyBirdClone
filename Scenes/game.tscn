@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c6ve2hxhkmlix"]
+[gd_scene load_steps=11 format=3 uid="uid://c6ve2hxhkmlix"]
 
 [ext_resource type="PackedScene" uid="uid://3dolmuknvf1s" path="res://Scenes/flappy_bird.tscn" id="1_iloyg"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_m1otu"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://yq5hkrlvu00y" path="res://Scenes/pipe_manager.tscn" id="3_0nvv8"]
 [ext_resource type="PackedScene" uid="uid://b30d8nug4a56i" path="res://Scenes/background_manager.tscn" id="3_rjvyg"]
 [ext_resource type="PackedScene" uid="uid://cfvw1at1bqy55" path="res://Scenes/pipes.tscn" id="4_kiek0"]
+[ext_resource type="Texture2D" uid="uid://dv3c38wbmgqo2" path="res://Assets/Sprites/message.png" id="7_rju0f"]
+[ext_resource type="Script" path="res://Scripts/guide_menu.gd" id="8_i8kkv"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_28jfq"]
 distance = 30.0
@@ -60,6 +62,26 @@ position = Vector2(0, -331)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopLimit"]
 position = Vector2(88, 0)
 shape = SubResource("RectangleShape2D_81miu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GuideMenu" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.0
+offset_top = -213.0
+offset_right = 92.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_rju0f")
+stretch_mode = 5
+script = ExtResource("8_i8kkv")
 
 [connection signal="timeout" from="GameManager/GameOverTimer" to="GameManager" method="_on_game_over_timer_timeout"]
 [connection signal="died" from="FlappyBird" to="GameManager" method="_on_flappy_bird_died"]

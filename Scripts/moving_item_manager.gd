@@ -8,11 +8,13 @@ var moving_speed:float
 var should_arrange_item:bool = true
 
 func _ready():
+	%GameManager.game_over.connect(stop_all)
+	%GameManager.game_start.connect(_on_game_start)
+	
 	for item in get_children():
 		if item is MovingItem:
 			item.set_speed(moving_speed)
 			items.append(item)
-	
 	
 	if !items.is_empty():
 		item_distance = items[0].get_sprite_width() - 1
@@ -43,3 +45,10 @@ func move_to_the_last(body):
 func stop_all():
 	for item in items:
 		item.stop_moving()
+		
+func start_all():
+	for item in items:
+		item.start_moving()
+
+func _on_game_start():
+	start_all()
