@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
 @export var forceUp:float = 300
-@export var max_rotation = 45  # Maximum rotation angle in degrees
+@export var max_rorate_up = 45  # Maximum rotation angle in degrees
+@export var max_rorate_down = -45  # Maximum rotation angle in degrees
 @export var rotation_speed = 5  # Speed of rotation adjustment
 
 @onready var animated_sprite = $AnimatedSprite2D
@@ -30,6 +31,7 @@ func handle_movement(delta:float)->void:
 		handle_gravity(delta)
 		handle_rotation(delta)
 		handle_input()
+		handle_animation()
 	else:
 		velocity = Vector2(0,0)
 	
@@ -38,14 +40,10 @@ func handle_movement(delta:float)->void:
 func handle_gravity(delta:float)->void:
 	velocity.y += gravity * delta
 
-func _process(delta:float)->void:
-	handle_animation()
-	
-
 func handle_animation()->void:
 	if velocity.y < 0:
 		animated_sprite.play("fly")
-	else:
+	elif velocity.y > 50:
 		animated_sprite.play("down")
 	
 func handle_input()->void:
@@ -63,10 +61,10 @@ func die()->void:
 func handle_rotation(delta):
 	# Calculate the desired rotation angle based on velocity.y
 	var target_angle = 0
-	if velocity.y > 0:
-		target_angle = max_rotation
+	if velocity.y > 300:
+		target_angle = max_rorate_up
 	elif velocity.y < 0:
-		target_angle = -max_rotation
+		target_angle = max_rorate_down
 
 	var new_rotation = lerpf(rotation_degrees, target_angle, rotation_speed * delta)
 	
@@ -76,3 +74,6 @@ func handle_rotation(delta):
 func _on_game_start()->void:
 	is_game_start = true
 	fly_up()
+	
+func add_score(added_score:int)->void:
+	%ScoreManager.add_score(added_score)

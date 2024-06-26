@@ -11,7 +11,10 @@ extends MovingItemManager
 
 @onready var random_timer = $RandomTimer
 
+var rng = RandomNumberGenerator.new()
+
 func _ready():
+	rng.randomize()  # Seed the generator for more randomness
 	moving_speed = speed
 	should_arrange_item = false
 	%GameManager.game_over.connect(stop_spawning)
@@ -43,8 +46,6 @@ func init_pipes(pipes: Pipes)-> void:
 	add_child(pipes)
 	items.append(pipes)
 	pipes.global_position = spaw_pos.global_position
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()  # Seed the generator for more randomness
 	pipes.global_position.y += rng.randf_range(min_pipe_range, max_pipe_range)
 	pipes.set_pipe_distance(pipe_distance)
 	pipes.start_moving()

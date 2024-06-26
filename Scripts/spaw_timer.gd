@@ -2,13 +2,11 @@ extends Timer
 
 @export var minValue:float = 0.1
 @export var maxValue:float = 1
+var rng = RandomNumberGenerator.new()
+
+func _ready():
+	rng.randomize()  # Seed the generator for more randomness
 
 func start_random():
-	var random_value = get_random_float(minValue, maxValue)
-	wait_time = random_value
+	wait_time = rng.randf_range(minValue, maxValue)
 	start()
-
-func get_random_float(min: float, max: float) -> float:
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()  # Seed the generator for more randomness
-	return rng.randf_range(minValue, maxValue)

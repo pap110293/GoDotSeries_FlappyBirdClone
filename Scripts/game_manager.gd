@@ -16,8 +16,8 @@ func _on_flappy_bird_died():
 
 func _on_game_over_timer_timeout():
 	get_tree().reload_current_scene()
-
-func _process(delta):
-	if !_is_game_start and Input.is_action_just_pressed("fly"):
+		
+func _input(event):
+	if !_is_game_start and event.is_action_pressed("fly"):
 		_is_game_start = true
 		game_start.emit()
