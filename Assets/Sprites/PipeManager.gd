@@ -12,13 +12,9 @@ extends MovingItemManager
 @onready var random_timer = $RandomTimer
 
 func _ready():
-	random_timer.start()
 	moving_speed = speed
 	should_arrange_item = false
 	%GameManager.game_over.connect(stop_spawning)
-	random_timer.start_random()
-	random_timer.minValue = min_spaw_time
-	random_timer.maxValue = max_spaw_time
 	super._ready()
 
 func _on_random_timer_timeout():
@@ -33,6 +29,11 @@ func spawThePipe():
 func stop_spawning()->void:
 	random_timer.stop()
 
+func start_spawning()->void:
+	random_timer.start_random()
+	random_timer.minValue = min_spaw_time
+	random_timer.maxValue = max_spaw_time
+
 func _on_limit_line_body_entered(body):
 	if body is Pipes:
 		body.queue_free()
@@ -46,3 +47,8 @@ func init_pipes(pipes: Pipes)-> void:
 	rng.randomize()  # Seed the generator for more randomness
 	pipes.global_position.y += rng.randf_range(min_pipe_range, max_pipe_range)
 	pipes.set_pipe_distance(pipe_distance)
+	pipes.start_moving()
+	
+func _on_game_start():
+	start_spawning()
+	super._on_game_start()
