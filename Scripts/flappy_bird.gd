@@ -22,10 +22,9 @@ func _ready():
 func _physics_process(delta:float):
 	handle_movement(delta)
 	
-	if is_die:
-		collision_polygon.disabled = true
-		
-	
+	#if is_die:
+		#collision_polygon.disabled = true
+
 func handle_movement(delta:float)->void:
 	if !is_die and is_game_start:
 		handle_gravity(delta)

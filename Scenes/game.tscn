@@ -21,8 +21,7 @@ size = Vector2(797, 15)
 [node name="Game" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -151)
-zoom = Vector2(2.1, 2.1)
+zoom = Vector2(1.55, 1.55)
 
 [node name="Managers" type="Node" parent="."]
 
@@ -39,7 +38,7 @@ script = ExtResource("2_u6qph")
 score_label = NodePath("../../CanvasLayer/MarginContainer/ScoreLabel")
 
 [node name="BackgroundManager" parent="Managers" instance=ExtResource("3_rjvyg")]
-position = Vector2(-496, -213)
+position = Vector2(-291, -57)
 speed = 50.0
 
 [node name="PipeManager" parent="Managers" node_paths=PackedStringArray("spaw_pos") instance=ExtResource("3_0nvv8")]
@@ -48,18 +47,18 @@ min_spaw_time = 1.5
 pipe_scene = ExtResource("4_kiek0")
 
 [node name="SpawPos" type="Marker2D" parent="Managers/PipeManager"]
-position = Vector2(229, -151)
+position = Vector2(200, 0)
 
 [node name="GroundManager" parent="Managers" instance=ExtResource("2_e4bov")]
-position = Vector2(-473, 99)
+position = Vector2(-267, 254)
 
 [node name="FlappyBird" parent="." instance=ExtResource("1_iloyg")]
 z_index = 2
-position = Vector2(-82, -160)
+position = Vector2(-100, 0)
 rotation_speed = 4
 
 [node name="LimitLine" type="Area2D" parent="."]
-position = Vector2(-717, -167)
+position = Vector2(-602, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LimitLine"]
 rotation = 1.57079
@@ -92,7 +91,7 @@ theme_override_constants/margin_bottom = 20
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 70
 text = "9999"
 
 [node name="GuideMenu" type="TextureRect" parent="CanvasLayer"]
