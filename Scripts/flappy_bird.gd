@@ -6,7 +6,14 @@ extends CharacterBody2D
 @export var rotation_speed = 5  # Speed of rotation adjustment
 
 @onready var animated_sprite = $AnimatedSprite2D
-@onready var collision_polygon = $CollisionPolygon2D
+@onready var audio_manager = $AudioManager
+
+enum AUDIO {POINT, DIE, HIT, WING}
+const POINT = preload("res://Assets/Audio/point.ogg")
+const DIE = preload("res://Assets/Audio/die.ogg")
+const HIT = preload("res://Assets/Audio/hit.ogg")
+const WING = preload("res://Assets/Audio/wing.ogg")
+const audio_streams:Dictionary = {AUDIO.POINT:POINT, AUDIO.DIE:DIE, AUDIO.HIT:HIT, AUDIO.WING:WING}
 
 signal died
 
@@ -17,14 +24,15 @@ var is_game_start:bool = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
+	audio_manager.add_stream(str(AUDIO.POINT), audio_streams[AUDIO.POINT])
+	audio_manager.add_stream(str(AUDIO.DIE), audio_streams[AUDIO.DIE])
+	audio_manager.add_stream(str(AUDIO.HIT), audio_streams[AUDIO.HIT])
+	audio_manager.add_stream(str(AUDIO.WING), audio_streams[AUDIO.WING])
 	%GameManager.game_start.connect(_on_game_start)
 
 func _physics_process(delta:float):
 	handle_movement(delta)
 	
-	#if is_die:
-		#collision_polygon.disabled = true
-
 func handle_movement(delta:float)->void:
 	if !is_die and is_game_start:
 		handle_gravity(delta)
@@ -50,11 +58,13 @@ func handle_input()->void:
 		fly_up()
 
 func fly_up()->void:
+	audio_manager.play_stream(str(AUDIO.WING))
 	velocity.y = -forceUp
 
 func die()->void:
 	animated_sprite.stop()
 	is_die = true
+	audio_manager.play_stream(str(AUDIO.HIT))
 	died.emit()
 	
 func handle_rotation(delta):
