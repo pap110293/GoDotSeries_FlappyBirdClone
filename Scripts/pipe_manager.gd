@@ -14,7 +14,6 @@ extends MovingItemManager
 var rng = RandomNumberGenerator.new()
 
 func _ready():
-	#get_viewport().size_changed.connect(_on_viewport_size_changed)
 	rng.randomize()  # Seed the generator for more randomness
 	moving_speed = speed
 	should_arrange_item = false

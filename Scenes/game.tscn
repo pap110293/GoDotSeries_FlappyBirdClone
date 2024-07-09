@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://c6ve2hxhkmlix"]
+[gd_scene load_steps=14 format=3 uid="uid://c6ve2hxhkmlix"]
 
 [ext_resource type="PackedScene" uid="uid://3dolmuknvf1s" path="res://Scenes/flappy_bird.tscn" id="1_iloyg"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_m1otu"]
 [ext_resource type="PackedScene" uid="uid://bqflplh3shh68" path="res://Scenes/ground_manager.tscn" id="2_e4bov"]
 [ext_resource type="Script" path="res://Scripts/score_manager.gd" id="2_u6qph"]
 [ext_resource type="PackedScene" uid="uid://yq5hkrlvu00y" path="res://Scenes/pipe_manager.tscn" id="3_0nvv8"]
+[ext_resource type="PackedScene" uid="uid://bj842xwix2b1p" path="res://Scenes/audio_manager.tscn" id="3_7tbu4"]
 [ext_resource type="PackedScene" uid="uid://b30d8nug4a56i" path="res://Scenes/background_manager.tscn" id="3_rjvyg"]
 [ext_resource type="PackedScene" uid="uid://cfvw1at1bqy55" path="res://Scenes/pipes.tscn" id="4_kiek0"]
 [ext_resource type="Texture2D" uid="uid://dv3c38wbmgqo2" path="res://Assets/Sprites/message.png" id="7_rju0f"]
@@ -21,7 +22,8 @@ size = Vector2(797, 15)
 [node name="Game" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.55, 1.55)
+position = Vector2(208, 14)
+zoom = Vector2(1.1, 1.1)
 
 [node name="Managers" type="Node" parent="."]
 
@@ -37,28 +39,32 @@ unique_name_in_owner = true
 script = ExtResource("2_u6qph")
 score_label = NodePath("../../CanvasLayer/MarginContainer/ScoreLabel")
 
+[node name="AudioManager" parent="Managers/ScoreManager" instance=ExtResource("3_7tbu4")]
+
 [node name="BackgroundManager" parent="Managers" instance=ExtResource("3_rjvyg")]
-position = Vector2(-291, -57)
+position = Vector2(-510, -57)
 speed = 50.0
 
+[node name="SpawPos" type="Marker2D" parent="Managers/BackgroundManager"]
+position = Vector2(1110, 0)
+
 [node name="PipeManager" parent="Managers" node_paths=PackedStringArray("spaw_pos") instance=ExtResource("3_0nvv8")]
-spaw_pos = NodePath("SpawPos")
-min_spaw_time = 1.5
+spaw_pos = NodePath("../BackgroundManager/SpawPos")
+max_pipe_range = 80.0
+min_pipe_range = -80.0
+min_spaw_time = 1.8
 pipe_scene = ExtResource("4_kiek0")
 
-[node name="SpawPos" type="Marker2D" parent="Managers/PipeManager"]
-position = Vector2(200, 0)
-
 [node name="GroundManager" parent="Managers" instance=ExtResource("2_e4bov")]
-position = Vector2(-267, 254)
+position = Vector2(-486, 252)
 
 [node name="FlappyBird" parent="." instance=ExtResource("1_iloyg")]
 z_index = 2
-position = Vector2(-100, 0)
+position = Vector2(-95, -2)
 rotation_speed = 4
 
 [node name="LimitLine" type="Area2D" parent="."]
-position = Vector2(-602, 0)
+position = Vector2(-709, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LimitLine"]
 rotation = 1.57079
